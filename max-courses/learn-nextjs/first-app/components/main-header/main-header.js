@@ -2,10 +2,11 @@ import Link from "next/link";
 import logoImg from "@/assets/logo.png";
 import classes from "./main-header.module.css";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
+import { NavLink } from "../nav-link/nav-link";
 
 export default function MainHeader() {
-  const path = usePathname();
+  // const path = usePathname();
   return (
     <header className={classes.header}>
       <Link className={classes.logo} href="/">
@@ -15,15 +16,22 @@ export default function MainHeader() {
       <nav className={classes.nav}>
         <ul>
           <li>
-            <Link
+            <NavLink href="/meals">Browse Meals</NavLink>
+            {/* <Link
               href="/meals"
               className={path.startsWith("/meals") ? classes.active : undefined}
             >
               Browse Meals
-            </Link>
+            </Link> */}
           </li>
           <li>
-            <Link href="/community">Foodies Community</Link>
+            <NavLink href="/community"> Foodies Community</NavLink>
+            {/* <Link
+              href="/community"
+              className={path.startsWith("/meals") ? classes.active : undefined}
+            >
+              Foodies Community
+            </Link> */}
           </li>
         </ul>
       </nav>
