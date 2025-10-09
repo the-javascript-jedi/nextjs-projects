@@ -1,10 +1,13 @@
-import { PrismaClient } from "@/app/generated/prisma/client";
+// db/index.ts
+import { PrismaClient } from "@prisma/client";
 
-export const db = new PrismaClient();
+declare global {
+  // eslint-disable-next-line no-var
+  var __prisma: PrismaClient | undefined;
+}
 
-db.snippet.create({
-  data: {
-    title: "Title!",
-    code: "const abc=()=>{}",
-  },
-});
+const prisma = global.__prisma ?? new PrismaClient();
+
+if (process.env.NODE_ENV === "development") global.__prisma = prisma;
+
+export const db = prisma;
