@@ -13,7 +13,7 @@ export default function MainHeader() {
         <Image src={logoImg} alt="A plate with food on it" priority />
         NextLevel Food
       </Link>
-      <nav className={classes.nav}>
+      <nav className={classes.navList}>
         <ul>
           <li>
             <NavLink href="/meals">Browse Meals</NavLink>
