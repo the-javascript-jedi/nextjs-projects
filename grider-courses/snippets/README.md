@@ -15,3 +15,5 @@ npm install @prisma/client
 
 npx prisma generate
 npx prisma migrate dev --name init
+
+npm i @monaco-editor/react
