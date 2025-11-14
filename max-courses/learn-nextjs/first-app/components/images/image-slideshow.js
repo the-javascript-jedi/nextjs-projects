@@ -2,29 +2,23 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-
-import burgerImg from "@/assets/burger.jpg";
-import curryImg from "@/assets/curry.jpg";
-import dumplingsImg from "@/assets/dumplings.jpg";
-import macncheeseImg from "@/assets/macncheese.jpg";
-import pizzaImg from "@/assets/pizza.jpg";
-import schnitzelImg from "@/assets/schnitzel.jpg";
-import tomatoSaladImg from "@/assets/tomato-salad.jpg";
 import classes from "./image-slideshow.module.css";
 
+// ✅ Use public folder paths instead of imports
 const images = [
-  { image: burgerImg, alt: "A delicious, juicy burger" },
-  { image: curryImg, alt: "A delicious, spicy curry" },
-  { image: dumplingsImg, alt: "Steamed dumplings" },
-  { image: macncheeseImg, alt: "Mac and cheese" },
-  { image: pizzaImg, alt: "A delicious pizza" },
-  { image: schnitzelImg, alt: "A delicious schnitzel" },
-  { image: tomatoSaladImg, alt: "A delicious tomato salad" },
+  { image: "/images/burger.jpg", alt: "A delicious, juicy burger" },
+  { image: "/images/curry.jpg", alt: "A delicious, spicy curry" },
+  { image: "/images/dumplings.jpg", alt: "Steamed dumplings" },
+  { image: "/images/macncheese.jpg", alt: "Mac and cheese" },
+  { image: "/images/pizza.jpg", alt: "A delicious pizza" },
+  { image: "/images/schnitzel.jpg", alt: "A delicious schnitzel" },
+  { image: "/images/tomato-salad.jpg", alt: "A delicious tomato salad" },
 ];
 
 export default function ImageSlideshow() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // Auto-slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) =>
@@ -41,8 +35,13 @@ export default function ImageSlideshow() {
         <Image
           key={index}
           src={image.image}
-          className={index === currentImageIndex ? classes.active : ""}
           alt={image.alt}
+          width={1200} // adjust size as needed
+          height={600}
+          className={`${classes.slide} ${
+            index === currentImageIndex ? classes.active : ""
+          }`}
+          style={{ objectFit: "cover" }}
         />
       ))}
     </div>
