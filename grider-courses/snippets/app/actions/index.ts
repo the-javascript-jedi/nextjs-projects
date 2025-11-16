@@ -17,3 +17,39 @@ export async function deleteSnippet(id: number) {
   });
   redirect("/");
 }
+
+export async function createSnippet(
+  formState: { message: string },
+  formData: FormData
+) {
+  // this needs to be a server action
+  // console.log("createSnippet running. window is", typeof window); // should be 'undefined'
+  // console.log("db is", typeof db);
+  // console.log("db keys:", Object.keys(db ?? {})); // will show available methods / delegates
+  //check the user's inputs and make sure they re valid
+  const title = String(formData.get("title") ?? "").trim();
+  const code = String(formData.get("code") ?? "").trim();
+
+  if (typeof title !== "string" || title.length < 3) {
+    return {
+      message: "Title must be longer",
+    };
+  }
+  if (typeof code !== "string" || code.length < 3) {
+    return {
+      message: "code must be longer",
+    };
+  }
+  // create a new record in the db
+  try {
+    const snippet = await db.snippet.create({
+      data: { title, code },
+    });
+    // redirect the user back to the root route
+    console.log("created snippet", snippet);
+    redirect("/");
+  } catch (err) {
+    console.error("createSnippet error:", err);
+    throw err;
+  }
+}
