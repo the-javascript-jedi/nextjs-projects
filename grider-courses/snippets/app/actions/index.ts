@@ -42,14 +42,25 @@ export async function createSnippet(
   }
   // create a new record in the db
   try {
-    const snippet = await db.snippet.create({
-      data: { title, code },
-    });
+    //temp commenting start
+    // const snippet = await db.snippet.create({
+    //   data: { title, code },
+    // });
     // redirect the user back to the root route
-    console.log("created snippet", snippet);
+    // console.log("created snippet", snippet);
+    //temp commenting end
+
+    // throw new Error("Oops!!!Failed to save to database!!");
     redirect("/");
-  } catch (err) {
-    console.error("createSnippet error:", err);
-    throw err;
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      return {
+        message: err.message,
+      };
+    } else {
+      return {
+        message: "Something went wrong",
+      };
+    }
   }
 }
