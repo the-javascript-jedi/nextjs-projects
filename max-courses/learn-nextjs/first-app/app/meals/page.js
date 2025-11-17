@@ -28,10 +28,10 @@ export default function Home() {
       </header>
       <main>
         {/* the meals function component */}
-        <Suspense>
-          <Meals
-            fallback={<p className={classes.loading}>Fetching Meals...</p>}
-          />
+        <Suspense
+          fallback={<p className={classes.loading}>Fetching Meals...</p>}
+        >
+          <Meals />
         </Suspense>
       </main>
     </>
